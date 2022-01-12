@@ -118,12 +118,13 @@ module NistPubid
         .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
         .gsub("NIST CSWP", "NIST CSRC White Paper")
         .gsub("NIST SP 800-56ar", "NIST SP 800-56Ar1")
-        .gsub("NIST.CSWP.01162020pt", "NIST.CSWP.01162020(por)")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
         .gsub(/(?<=\d)viet/, "(vie)")
         .gsub(/(?<=\d)port/, "(por)")
+        .gsub(/(?<=\d)(pt)(?!\d)/, "(por)")
+        .gsub(/(?<=\d)id/, "(ind)")
     end
 
     def self.parse(code)

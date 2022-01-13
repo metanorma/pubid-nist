@@ -699,7 +699,7 @@ RSpec.describe NistPubid::Document do
     context "NIST CSWP 04162018pt" do
       let(:original_pubid) { "NIST CSWP 04162018pt" }
       let(:short_pubid) { "NIST CSRC White Paper 04162018(por)" }
-      let(:mr_pubid) { "NIST.CSRC.White.Paper.04162018.por" }
+      let(:mr_pubid) { "NIST.CSWP.04162018.por" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -707,7 +707,7 @@ RSpec.describe NistPubid::Document do
     context "NIST CSWP 01162020id" do
       let(:original_pubid) { "NIST CSWP 01162020id" }
       let(:short_pubid) { "NIST CSRC White Paper 01162020(ind)" }
-      let(:mr_pubid) { "NIST.CSRC.White.Paper.01162020.ind" }
+      let(:mr_pubid) { "NIST.CSWP.01162020.ind" }
 
       it_behaves_like "converts pubid to different formats"
     end

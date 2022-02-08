@@ -102,6 +102,13 @@ module NistPubid
       end
     end
 
+    def ==(other)
+      other.instance_variables.each do |var|
+        return false if instance_variable_get(var) != other.instance_variable_get(var)
+      end
+      true
+    end
+
     def merge(document)
       document.instance_variables.each do |var|
         val = document.instance_variable_get(var)

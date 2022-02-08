@@ -34,6 +34,10 @@ module NistPubid
       result
     end
 
+    def ==(other)
+      other.serie == @serie
+    end
+
     def self.filter_by_publisher(publisher, series)
       if publisher.to_s == "NIST"
         series.select { |k,v| k =~ /^(?!NBS)/ }

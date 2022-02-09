@@ -5,8 +5,8 @@ module NistPubid
     attr_accessor :stage, :original_code
 
     def initialize(original_code)
-      self.original_code = original_code
-      @stage = self.class.regexp.match(original_code)&.[](1)
+      @stage = self.original_code = original_code
+      # @stage = self.class.regexp.match(original_code)&.[](1)
     end
 
     def to_s(format = :short)

@@ -8,7 +8,7 @@ RSpec.describe NistPubid::Document do
 
   it "parses NIST PubID using parameters" do
     expect(described_class.new(publisher: NistPubid::Publisher.new(publisher: "NIST"),
-                               serie: "NIST SP",
+                               serie: NistPubid::Serie.parse("NIST SP"),
                                docnumber: "800-53", revision: 5).to_s(:mr))
       .to eq(mr_pubid)
   end

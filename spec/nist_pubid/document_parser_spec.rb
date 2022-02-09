@@ -24,6 +24,25 @@ RSpec.describe NistPubid::DocumentParser do
       expect(described_class.new).to parse("NIST SP 800-57pt1r4")
     end
 
+    it "parses update" do
+      expect(described_class.new.update).to parse("/Upd1-2012")
+    end
+
+    it "parses translation" do
+      expect(described_class.new.translation.parse("(esp)")).to eq(translation: "esp")
+    end
+
+    it "parses edition" do
+      expect(described_class.new.edition.parse("e5")).to eq(edition: "5")
+    rescue Parslet::ParseFailed => failure
+      raise failure.parse_failure_cause.ascii_tree
+    end
+
+    it "parses NIST SP(IPD) 800-53e5" do
+      expect(described_class.new.parse("NIST SP(IPD) 800-53e5")).to eq("NIST SP(IPD) 800-53e5")
+    rescue Parslet::ParseFailed => failure
+      raise failure.parse_failure_cause.ascii_tree
+    end
     # NIST NCSTAR 1-1Cv1
     # NIST SP 800-57pt1r4
     # NIST IR 8115(esp)

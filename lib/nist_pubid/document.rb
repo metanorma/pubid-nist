@@ -132,7 +132,9 @@ module NistPubid
 
     def self.parse(code)
       code = update_old_code(code)
-      return DocumentTransform.new.apply(DocumentParser.new.parse(code))
+      # parsed =
+      # parser = document_parser.find_parser(code)
+      DocumentTransform.new.apply(DocumentParser.new.parse(code))
     rescue Parslet::ParseFailed => failure
       raise "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end

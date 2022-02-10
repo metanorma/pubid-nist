@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 require "yaml"
+require "parslet"
 require_relative "nist_pubid/serie"
+require_relative "nist_pubid/parsers/default"
+require_relative "nist_pubid/document_transform"
+require_relative "nist_pubid/document_parser"
 
 Dir[File.join(__dir__, 'nist_pubid/series', '*.rb')].each do |file|
+  require file
+end
+
+Dir[File.join(__dir__, 'nist_pubid/parsers', '*.rb')].each do |file|
   require file
 end
 
@@ -11,7 +19,14 @@ SERIES_CLASSES = NistPubid::Series.constants.select do |c|
   NistPubid::Series.const_get(c).is_a?(Class)
 end.map do |series_class|
   series = NistPubid::Series.const_get(series_class)
-  [series.name.split("::").last.gsub!(/(.)([A-Z])/,'\1 \2').upcase, series]
+  [series.name.split("::").last.gsub!(/(.)([A-Z])/, '\1 \2').upcase, series]
+end.to_h
+
+PARSERS_CLASSES = NistPubid::Parsers.constants.select do |c|
+  NistPubid::Parsers.const_get(c).is_a?(Class)
+end.map do |parser_class|
+  parser = NistPubid::Parsers.const_get(parser_class)
+  [parser.name.split("::").last.gsub(/(.)([A-Z])/, '\1 \2').upcase, parser]
 end.to_h
 
 require_relative "nist_pubid/document"
@@ -20,5 +35,3 @@ require_relative "nist_pubid/stage"
 require_relative "nist_pubid/errors"
 require_relative "nist_pubid/nist_tech_pubs"
 require_relative "nist_pubid/edition"
-require_relative "nist_pubid/document_parser"
-require_relative "nist_pubid/document_transform"

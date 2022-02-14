@@ -88,11 +88,12 @@ module NistPubid
                   :edition, :supplement, :update_year, :section, :appendix,
                   :errata, :index, :insert
 
-    def initialize(publisher:, serie:, docnumber:, **opts)
+    def initialize(publisher:, serie:, docnumber:, stage: nil, **opts)
       @publisher = publisher
       @serie = serie #Serie.new(serie: serie)
       @code = docnumber
-      opts.each { |key, value| send("#{key}=", value) }
+      @stage = Stage.new(stage.to_s) if stage
+      opts.each { |key, value| send("#{key}=", value.to_s) }
     end
 
     # returns weight based on amount of defined attributes

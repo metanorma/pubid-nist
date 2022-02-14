@@ -24,7 +24,7 @@ module NistPubid
       end
 
       rule(:revision) do
-        str("r") >> (match('\d').repeat >> match("[a-z]").maybe).as(:revision)
+        str("r") >> (match('\d').repeat(1) >> match("[a-z]").maybe).as(:revision)
       end
 
       rule(:volume) do

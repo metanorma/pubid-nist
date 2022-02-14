@@ -19,5 +19,21 @@ module NistPubid
          parts: subtree(:parts)) do |x|
       create_document(x[:series], x[:report_number], x[:parts])
     end
+
+    rule(series: simple(:series), report_number: simple(:report_number),
+         parts: subtree(:parts)) do |x|
+      create_document(x[:series], x[:report_number], x[:parts])
+    end
+
+    def apply(tree, context = nil)
+      series = tree[:series]
+      document_parameters = tree.reject { |k, _| %i[report_number series parts].include?(k) }
+      tree[:parts].each { |p| document_parameters.merge!(p) } if tree[:parts]
+
+      Document.new(publisher: Publisher.parse(series),
+                   serie: Serie.new(serie: series.to_s.gsub(".", " ")),
+                   docnumber: tree[:report_number].to_s,
+                   **document_parameters)
+    end
   end
 end

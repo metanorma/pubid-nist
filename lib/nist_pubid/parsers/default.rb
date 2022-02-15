@@ -2,21 +2,26 @@ module NistPubid
   module Parsers
     class Default < Parslet::Parser
       rule(:identifier) do
-        stage >> (str(" ") | str(".")) >> report_number >> parts.repeat.as(:parts)
+        stage.maybe >> (str(" ") | str(".")) >> report_number >> parts.repeat.as(:parts)
       end
 
       rule(:parts) do
-        (edition | revision | version | volume | part | update | translation | addendum | supplement)
+        (edition | revision | version | volume | part | update | translation |
+          addendum | supplement | errata)
       end
 
       rule(:supplement) do
         (str("supp") | str("sup")) >> match('\d').repeat.as(:supplement)
       end
 
+      rule(:errata) do
+        str("-errata").as(:errata)
+      end
+
       rule(:stage) do
         (str("(") >> (STAGES.keys.reduce do |acc, s|
           (acc.is_a?(String) ? str(acc) : acc) | str(s)
-        end).as(:stage) >> str(")")).maybe
+        end).as(:stage) >> str(")"))
       end
 
       rule(:report_number) do

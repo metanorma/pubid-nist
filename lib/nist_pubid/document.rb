@@ -88,13 +88,28 @@ module NistPubid
                   :edition, :supplement, :update_year, :section, :appendix,
                   :errata, :index, :insert
 
-    def initialize(publisher:, serie:, docnumber:, stage: nil, supplement: nil, **opts)
+    def initialize(publisher:, serie:, docnumber:, stage: nil, supplement: nil,
+                   edition_month: nil, edition_year: nil, edition_day: nil, **opts)
       @publisher = publisher
-      @serie = serie #Serie.new(serie: serie)
+      @serie = serie
       @code = docnumber
       @stage = Stage.new(stage.to_s) if stage
       @supplement = (supplement.is_a?(Array) && "") || supplement
+      @edition = parse_edition(edition_month, edition_year, edition_day) if edition_month || edition_year
       opts.each { |key, value| send("#{key}=", value.to_s) }
+    end
+
+    def parse_edition(edition_month, edition_year, edition_day)
+      if edition_month
+        date = Date.parse("#{edition_day || '01'}/#{edition_month}/#{edition_year}")
+        if edition_day
+          Edition.new(month: date.month, year: date.year, day: date.day)
+        else
+          Edition.new(month: date.month, year: date.year)
+        end
+      else
+        Edition.new(year: edition_year.to_i)
+      end
     end
 
     # returns weight based on amount of defined attributes

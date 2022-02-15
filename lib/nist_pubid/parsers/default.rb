@@ -25,7 +25,7 @@ module NistPubid
       end
 
       rule(:report_number) do
-        (match('\d').repeat(1) >> str("-").maybe >> match('\d').repeat >> match("[aA-Z]").maybe).as(:report_number)
+        (match('\d').repeat(1) >> (str("-") >> match('\d').repeat(1) >> match("[aA-Z]").maybe).maybe).as(:report_number)
       end
 
       rule(:part) do

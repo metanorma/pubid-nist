@@ -999,6 +999,14 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 1011-I-2.0" do
+
+    end
+
+    context "NIST SP 1011-II-1.0" do
+
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }

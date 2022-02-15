@@ -15,8 +15,7 @@ module NistPubid
 
     def parse(code)
       parsed = super(code)
-    #   @parsed = parse(code)
-      series = parsed[:series].to_s
+      series = parsed[:series].to_s.gsub(".", " ")
       parser = find_parser(series)
       parser.new.parse(parsed[:remaining].to_s).merge({ series: series })
     end

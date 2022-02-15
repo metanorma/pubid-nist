@@ -88,11 +88,12 @@ module NistPubid
                   :edition, :supplement, :update_year, :section, :appendix,
                   :errata, :index, :insert
 
-    def initialize(publisher:, serie:, docnumber:, stage: nil, **opts)
+    def initialize(publisher:, serie:, docnumber:, stage: nil, supplement: nil, **opts)
       @publisher = publisher
       @serie = serie #Serie.new(serie: serie)
       @code = docnumber
       @stage = Stage.new(stage.to_s) if stage
+      @supplement = (supplement.is_a?(Array) && "") || supplement
       opts.each { |key, value| send("#{key}=", value.to_s) }
     end
 

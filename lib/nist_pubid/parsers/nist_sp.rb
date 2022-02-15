@@ -1,10 +1,6 @@
 module NistPubid
   module Parsers
     class NistSp < Default
-      rule(:parts) do
-        (edition | revision | version | volume | part | update | translation | addendum)
-      end
-
       rule(:part) do
         (str("pt") | str("p")) >> match("\\d").as(:part)
       end

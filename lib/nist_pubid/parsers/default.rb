@@ -6,7 +6,11 @@ module NistPubid
       end
 
       rule(:parts) do
-        (revision | version | volume | part | update | translation | edition | addendum)
+        (edition | revision | version | volume | part | update | translation | addendum | supplement)
+      end
+
+      rule(:supplement) do
+        (str("supp") | str("sup")) >> match('\d').repeat.as(:supplement)
       end
 
       rule(:stage) do

@@ -18,10 +18,6 @@ module NistPubid
         match('\d').repeat(1) >> (str("GB") | str("a")).maybe
       end
 
-      # rule(:report_number_second) do
-      #
-      # end
-
       rule(:report_number) do
         # (\d+-\d{1,3}).as(:report_number)
         # (\d+-\d{4}).as(:report_number) when first number is 250
@@ -54,7 +50,8 @@ module NistPubid
       end
 
       rule(:revision) do
-        (str("r") | str("-")) >> (match('\d').repeat(1) >> match("[a-z]").maybe).as(:revision)
+        ((str("rev") | str("r") | str("-")) >> (match('\d').repeat(1) >> match("[a-z]").maybe).as(:revision)) |
+          (str("r") >> match("[a-z]").as(:revision))
       end
     end
   end

@@ -22,22 +22,23 @@ module NistPubid
         (report_number_first.capture(:first_number) >>
           (str("-") >>
             # match('\d').repeat)).as(:report_number)
-            dynamic do |source, context|
+            dynamic do |_source, context|
               # consume 4 numbers or any amount of numbers
               # for document ids starting from 250
               (if context.captures[:first_number] == "250"
-                 match('\d').repeat
+                 match('\d').repeat(1)
                else
                  # skip edition numbers (parse only if have not 4 numbers)
-                 match('\d').repeat(4, 4).absent? >> match('\d').repeat
-               end# |
+                 match('\d').repeat(4, 4).absent? >> match('\d').repeat(1)
+               end >> match["[A-Zabcd]"].maybe
                 # parse last number as edition if have 4 numbers
                 #match('\d').repeat(1).as(:edition)
               )
-            end >>
+            end
             # parse A-Z and abcd as part of report number
-            match["[A-Zabcd]"].maybe
-          ).maybe).as(:report_number)
+
+          ).maybe >> (str("-NCNR") | str("-PERMIS") | str("-BFRL")).maybe
+        ).as(:report_number)
           # str("-") >> match('\d').repeat(1).as(:revision)
       end
 

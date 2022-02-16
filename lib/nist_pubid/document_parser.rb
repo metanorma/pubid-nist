@@ -3,20 +3,26 @@ module NistPubid
     attr_accessor :parsed
 
     rule(:series) do
-      (SERIES["long"].keys
+      ((SERIES["long"].keys
                      .sort_by(&:length).reverse
-                     .map { |v| [v, v.gsub(" ", ".")] } # parse MRI
                      .flatten
                      .reduce do |acc, s|
-        (acc.is_a?(String) ? str(acc) : acc) | str(s)
-      end).as(:series) >> any.repeat.as(:remaining)
+          (acc.is_a?(String) ? str(acc) : acc) | str(s)
+        end).as(:series) |
+        (SERIES["mr"].values.reduce do |acc, s|
+          (acc.is_a?(String) ? str(acc) : acc) | str(s)
+        end).as(:series_mr)) >> any.repeat.as(:remaining)
     end
 
     root(:series)
 
     def parse(code)
       parsed = super(code)
-      series = parsed[:series].to_s.gsub(".", " ")
+      series = if parsed[:series]
+                 parsed[:series].to_s
+               else
+                 SERIES["mr"].key(parsed[:series_mr].to_s)
+               end
       parser = find_parser(series)
       parser.new.parse(parsed[:remaining].to_s).merge({ series: series })
     end

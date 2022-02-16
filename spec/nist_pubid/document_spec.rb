@@ -714,12 +714,12 @@ RSpec.describe NistPubid::Document do
       end
     end
 
-    context "National Institute of Standards and Technology Monograph 175" do
-      let(:original_pubid) { "National Institute of Standards and Technology Monograph 175" }
-      let(:short_pubid) { "NIST MN 175" }
-
-      it_behaves_like "converts pubid to different formats"
-    end
+    # context "National Institute of Standards and Technology Monograph 175" do
+    #   let(:original_pubid) { "National Institute of Standards and Technology Monograph 175" }
+    #   let(:short_pubid) { "NIST MN 175" }
+    #
+    #   it_behaves_like "converts pubid to different formats"
+    # end
 
     context "NBS FIPS 107-Feb1985" do
       let(:original_pubid) { "NBS FIPS 107-Feb1985" }
@@ -728,12 +728,12 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
-    context "National Bureau of Standards Monograph 175" do
-      let(:original_pubid) { "National Bureau of Standards Monograph 175" }
-      let(:short_pubid) { "NBS MN 175" }
-
-      it_behaves_like "converts pubid to different formats"
-    end
+    # context "National Bureau of Standards Monograph 175" do
+    #   let(:original_pubid) { "National Bureau of Standards Monograph 175" }
+    #   let(:short_pubid) { "NBS MN 175" }
+    #
+    #   it_behaves_like "converts pubid to different formats"
+    # end
 
     context "NBS FIPS 11-1-Sep1977" do
       let(:original_pubid) { "NBS FIPS 11-1-Sep1977" }
@@ -742,42 +742,42 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
-    context "National Institute of Standards and Technology Special Publication "\
-            "800-53, Revision 4 Update 3-2015" do
-      let(:original_pubid) do
-        "National Institute of Standards and Technology Special Publication "\
-          "800-53, Revision 4 Update 3-2015"
-      end
-      let(:short_pubid) { "NIST SP 800-53r4/Upd3-2015" }
-      let(:mr_pubid) { "NIST.SP.800-53r4.u3-2015" }
+    # context "National Institute of Standards and Technology Special Publication "\
+    #         "800-53, Revision 4 Update 3-2015" do
+    #   let(:original_pubid) do
+    #     "National Institute of Standards and Technology Special Publication "\
+    #       "800-53, Revision 4 Update 3-2015"
+    #   end
+    #   let(:short_pubid) { "NIST SP 800-53r4/Upd3-2015" }
+    #   let(:mr_pubid) { "NIST.SP.800-53r4.u3-2015" }
+    #
+    #   it_behaves_like "converts pubid to different formats"
+    # end
 
-      it_behaves_like "converts pubid to different formats"
-    end
-
-    context "National Institute of Standards and Technology Special"\
-            "  800-53 Edition 5" do
-      let(:original_pubid) do
-        "National Institute of Standards and Technology Special Publication "\
-          "800-53 Edition 5"
-      end
-      let(:long_pubid) { original_pubid }
-      let(:short_pubid) { "NIST SP 800-53e5" }
-
-      it_behaves_like "converts pubid to different formats"
-    end
-
-    context "Natl. Bur. Stand. Federal Inf. Process. Stds. 100" do
-      let(:original_pubid) do
-        "Natl. Bur. Stand. Federal Inf. Process. Stds. 100"
-      end
-      let(:short_pubid) { "NBS FIPS 100" }
-      let(:long_pubid) do
-        "National Bureau of Standards Federal Information Processing Standards"\
-          " Publication 100"
-      end
-
-      it_behaves_like "converts pubid to different formats"
-    end
+    # context "National Institute of Standards and Technology Special"\
+    #         "  800-53 Edition 5" do
+    #   let(:original_pubid) do
+    #     "National Institute of Standards and Technology Special Publication "\
+    #       "800-53 Edition 5"
+    #   end
+    #   let(:long_pubid) { original_pubid }
+    #   let(:short_pubid) { "NIST SP 800-53e5" }
+    #
+    #   it_behaves_like "converts pubid to different formats"
+    # end
+    #
+    # context "Natl. Bur. Stand. Federal Inf. Process. Stds. 100" do
+    #   let(:original_pubid) do
+    #     "Natl. Bur. Stand. Federal Inf. Process. Stds. 100"
+    #   end
+    #   let(:short_pubid) { "NBS FIPS 100" }
+    #   let(:long_pubid) do
+    #     "National Bureau of Standards Federal Information Processing Standards"\
+    #       " Publication 100"
+    #   end
+    #
+    #   it_behaves_like "converts pubid to different formats"
+    # end
 
     context "NBS FIPS 11-1-Sep30" do
       let(:original_pubid) { "NBS FIPS 11-1-Sep30" }

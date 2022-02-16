@@ -4,6 +4,7 @@ module NistPubid
 
     rule(:series) do
       (SERIES["long"].keys
+                     .sort_by(&:length).reverse
                      .map { |v| [v, v.gsub(" ", ".")] } # parse MRI
                      .flatten
                      .reduce do |acc, s|

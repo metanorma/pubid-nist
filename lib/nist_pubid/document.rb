@@ -245,7 +245,7 @@ module NistPubid
       result = render_serie(format)
       result += " " unless format == :short || stage.nil?
       result += "#{stage&.to_s(format)}"\
-                " #{code.upcase}#{render_part(format)}#{render_edition(format)}"\
+                " #{code}#{render_part(format)}#{render_edition(format)}"\
                 "#{render_localities(format)}"\
                 "#{render_update(format)}#{render_translation(format)}"
       result = render_addendum(result, format)

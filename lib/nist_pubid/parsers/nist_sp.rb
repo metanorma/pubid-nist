@@ -10,8 +10,8 @@ module NistPubid
           (str("v") >> (match('\d') >> str(".") >> match('\d') >> str(".") >> match('\d')).as(:version)))
       end
 
-      rule(:report_number_first) do
-        match('\d').repeat(1) >> (str("GB") | str("a")).maybe
+      rule(:first_report_number) do
+        (match('\d').repeat(1) >> (str("GB") | str("a")).maybe)
       end
 
       rule(:report_number) do
@@ -19,7 +19,7 @@ module NistPubid
         # (\d+-\d{4}).as(:report_number) when first number is 250
         # (\d+).as(:report_number)-(\d{4}).as(:edition)
         # or \d-\d-(\d).as(:revision)
-        (report_number_first.capture(:first_number) >>
+        (first_report_number.capture(:first_number).as(:first_report_number) >>
           (str("-") >>
             # match('\d').repeat)).as(:report_number)
             dynamic do |_source, context|
@@ -33,12 +33,12 @@ module NistPubid
                end >> match["[A-Zabcd]"].maybe
                 # parse last number as edition if have 4 numbers
                 #match('\d').repeat(1).as(:edition)
-              )
-            end
+              ) | (str("NCNR") | str("PERMIS") | str("BFRL"))
+            end.as(:second_report_number)
             # parse A-Z and abcd as part of report number
 
-          ).maybe >> (str("-NCNR") | str("-PERMIS") | str("-BFRL")).maybe
-        ).as(:report_number)
+          ).maybe
+        )
           # str("-") >> match('\d').repeat(1).as(:revision)
       end
 

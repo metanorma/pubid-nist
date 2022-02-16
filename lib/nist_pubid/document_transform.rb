@@ -27,12 +27,12 @@ module NistPubid
 
     def apply(tree, context = nil)
       series = tree[:series]
-      document_parameters = tree.reject { |k, _| %i[report_number series parts].include?(k) }
+      document_parameters = tree.reject { |k, _| %i[first_report_number second_report_number series parts].include?(k) }
       tree[:parts].each { |p| document_parameters.merge!(p) } if tree[:parts]
 
       Document.new(publisher: Publisher.parse(series),
                    serie: Serie.new(serie: series.to_s.gsub(".", " ")),
-                   docnumber: tree[:report_number].to_s,
+                   docnumber: tree.values_at(:first_report_number, :second_report_number).compact.join("-"),
                    **document_parameters)
     end
   end

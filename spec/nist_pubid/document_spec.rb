@@ -928,14 +928,13 @@ RSpec.describe NistPubid::Document do
     context "NBS.SP.428P1" do
       let(:original_pubid) { "NBS.SP.428P1" }
       let(:short_pubid) { "NBS SP 428pt1" }
-      
+
       it_behaves_like "converts pubid to different formats"
     end
 
     context "NBS CIRC 24supJan1924" do
       let(:original_pubid) { "NBS CIRC 24supJan1924" }
       let(:short_pubid) { "NBS CIRC 24e192401sup" }
-
 
       it_behaves_like "converts pubid to different formats"
     end

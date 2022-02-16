@@ -7,7 +7,7 @@ module NistPubid
 
       rule(:parts) do
         (edition | revision | version | volume | part | update | translation |
-          addendum | supplement | errata)
+          addendum | supplement | errata | index | insert | section)
       end
 
       rule(:supplement) do
@@ -15,7 +15,15 @@ module NistPubid
       end
 
       rule(:errata) do
-        str("-errata").as(:errata)
+        str("-").maybe >> str("errata").as(:errata)
+      end
+
+      rule(:index) do
+        (str("index") | str("indx")).as(:index)
+      end
+
+      rule(:insert) do
+        (str("insert") | str("ins")).as(:insert)
       end
 
       rule(:stage) do
@@ -25,7 +33,8 @@ module NistPubid
       end
 
       rule(:report_number) do
-        (match('\d').repeat(1) >> (str("-") >> match('\d').repeat(1) >> match("[aA-Z]").maybe).maybe).as(:report_number)
+        (match('\d').repeat(1).as(:first_report_number) >>
+          (str("-") >> (match('\d').repeat(1) >> match("[aA-Z]").maybe).as(:second_report_number)).maybe)
       end
 
       rule(:part) do
@@ -52,7 +61,6 @@ module NistPubid
         str("(") >> match("\\w").repeat(3,3).as(:translation) >> str(")")
       end
 
-      # (?<year>\d{4})|(?<sequence>\d+[A-Z]?)
       rule(:edition) do
         str("e") >> match("\\d").repeat(1).as(:edition)
       end
@@ -68,6 +76,10 @@ module NistPubid
                        .reduce do |acc, s|
           (acc.is_a?(String) ? str(acc) : acc) | str(s)
         end).as(:series)
+      end
+
+      rule(:section) do
+        str("sec") >> match('\d').repeat(1).as(:section)
       end
 
       root(:identifier)

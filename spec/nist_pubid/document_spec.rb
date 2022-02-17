@@ -998,6 +998,20 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST HB 105-1-1990" do
+      let(:original_pubid) { "NIST HB 105-1-1990" }
+      let(:short_pubid) { "NIST HB 105-1r1990" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS.HB.105-1r1990" do
+      let(:original_pubid) { "NBS.HB.105-1r1990" }
+      let(:short_pubid) { "NIST HB 105-1r1990" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NIST SP 1011-I-2.0" do
 
     end
@@ -1124,7 +1138,7 @@ RSpec.describe NistPubid::Document do
       it do
         expect(described_class.parse("NIST HB 133e4-2002").merge(
           described_class.parse("NIST.HB.133e4")
-        ).to_s(:short)).to eq("NIST HB 133e4-2002")
+        ).to_s(:short)).to eq("NIST HB 133e4")
       end
     end
 

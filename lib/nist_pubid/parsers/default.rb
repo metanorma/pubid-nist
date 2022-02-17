@@ -6,8 +6,8 @@ module NistPubid
       end
 
       rule(:parts) do
-        (edition | revision | version | volume | part | update | translation |
-          addendum | supplement | errata | index | insert | section | appendix)
+        (edition | revision | version | volume | part | update | addendum | translation |
+           supplement | errata | index | insert | section | appendix)
       end
 
       rule(:appendix) do
@@ -62,7 +62,8 @@ module NistPubid
       end
 
       rule(:translation) do
-        str("(") >> match("\\w").repeat(3,3).as(:translation) >> str(")")
+        (str("(") >> match('\w').repeat(3, 3).as(:translation) >> str(")")) |
+          (str(".") >> match('\w').repeat(3, 3).as(:translation))
       end
 
       rule(:edition) do

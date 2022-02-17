@@ -694,12 +694,12 @@ RSpec.describe NistPubid::Document do
 
 
 
-    context "NIST Monograph 175" do
-      let(:original_pubid) { "NIST Monograph 175" }
-      let(:short_pubid) { "NIST MN 175" }
-
-      it_behaves_like "converts pubid to different formats"
-    end
+    # context "NIST Monograph 175" do
+    #   let(:original_pubid) { "NIST Monograph 175" }
+    #   let(:short_pubid) { "NIST MN 175" }
+    #
+    #   it_behaves_like "converts pubid to different formats"
+    # end
 
     context "NBS FIPS 107-Mar1985" do
       let(:original_pubid) { "NBS FIPS 107-Mar1985" }

@@ -7,7 +7,11 @@ module NistPubid
 
       rule(:parts) do
         (edition | revision | version | volume | part | update | translation |
-          addendum | supplement | errata | index | insert | section)
+          addendum | supplement | errata | index | insert | section | appendix)
+      end
+
+      rule(:appendix) do
+        str("app").as(:appendix)
       end
 
       rule(:supplement) do

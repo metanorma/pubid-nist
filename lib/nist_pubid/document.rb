@@ -151,7 +151,7 @@ module NistPubid
       code = update_old_code(code)
       DocumentTransform.new.apply(DocumentParser.new.parse(code))
     rescue Parslet::ParseFailed => failure
-      raise "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
+      raise NistPubid::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
     def self.match(regex, code)

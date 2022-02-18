@@ -1,4 +1,3 @@
-#DOCNUMBER_REGEXP = /(\w{3}-\w{3}\d{4}|ADHOC|div9)/.freeze
 module NistPubid
   module Parsers
     class NbsRpt < Default

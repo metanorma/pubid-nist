@@ -58,7 +58,7 @@ module NistPubid
       end
 
       rule(:update) do
-        str("/Upd") >> match("\\d+").repeat(1).as(:update_number) >> str("-") >> match("\\d+").repeat(1).as(:update_year)
+        (str("/Upd") | str("/upd")) >> match("\\d+").repeat(1).as(:update_number) >> str("-") >> match("\\d+").repeat(1).as(:update_year)
       end
 
       rule(:translation) do

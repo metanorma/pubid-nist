@@ -43,7 +43,8 @@ module NistPubid
       end
 
       rule(:edition) do
-        ((str("e") >> match("\\d").repeat(1).as(:edition)) | (str("-") >> match("\\d").repeat(4,4).as(:edition)))
+        ((str("e") >> match("\\d").repeat(4,4).as(:edition_year)) | (str("-") >> match("\\d").repeat(4,4).as(:edition_year)) |
+          (str("e") >> match("\\d").repeat(1).as(:edition)))
       end
 
       rule(:revision) do

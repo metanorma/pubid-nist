@@ -9,7 +9,8 @@ module NistPubid
         (match('\d').repeat(4, 4).as(:first_report_number) >>
           str("-") >> match('\d').repeat(4, 4).as(:edition_year)) |
           match('\d').repeat(1).as(:first_report_number) >> (str("-") >>
-            (match('\d').repeat(1) | str("a")).as(:second_report_number)).maybe
+            # for extra number for NIST IR 85-3273-10
+            ((match('\d').repeat(1) | str("a")) >> (str("-") >> match('\d').repeat(1)).maybe).as(:second_report_number)).maybe
       end
     end
   end

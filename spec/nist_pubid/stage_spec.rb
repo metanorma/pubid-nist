@@ -6,8 +6,4 @@ RSpec.describe NistPubid::Stage do
     expect(described_class.new("IPD").to_s(:long))
       .to eq(long_stage)
   end
-
-  it "keeps original code" do
-    expect(described_class.parse(short_stage).original_code).to eq("(IPD)")
-  end
 end

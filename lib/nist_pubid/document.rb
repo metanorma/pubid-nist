@@ -154,10 +154,6 @@ module NistPubid
       raise NistPubid::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
-    def self.match(regex, code)
-      regex.match(code)&.to_s
-    end
-
     def to_s(format = :short)
       result = render_serie(format)
       result += " " unless format == :short || stage.nil?

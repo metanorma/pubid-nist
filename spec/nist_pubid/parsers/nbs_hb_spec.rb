@@ -11,7 +11,7 @@ RSpec.describe NistPubid::Parsers::NbsHb do
     it "parses 105-1-1990" do
       expect(subject.report_number.parse("105-1-1990")).to eq(first_report_number: "105",
                                                               second_report_number: "1",
-                                                              edition: "1990")
+                                                              edition_year: "1990")
     end
   end
 end

@@ -18,8 +18,8 @@ module NistPubid
       rule(:report_number) do
         match('\d').repeat(1).as(:first_report_number) >>
           (str("e") >> match('\d').repeat(1).as(:edition) >> (str("-") >> match('\d').repeat(1)).maybe |
-            str("-") >> match('\d').repeat(4,4).as(:edition) |
-            str("-") >> match('\d').repeat(1).as(:second_report_number) >> str("-") >>  match('\d').repeat(4,4).as(:edition) |
+            str("-") >> match('\d').repeat(4,4).as(:edition_year) |
+            str("-") >> match('\d').repeat(1).as(:second_report_number) >> str("-") >>  match('\d').repeat(4,4).as(:edition_year) |
             str("-") >> match('\d').repeat(1).as(:second_report_number)
           ).maybe
       end

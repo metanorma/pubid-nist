@@ -8,11 +8,11 @@ RSpec.describe NistPubid::Parsers::NistSp do
 
   context "when report number" do
     it "consumes number like 800-53" do
-      expect(subject.report_number.parse("800-53")).to eq(report_number: "800-53")
+      expect(subject.report_number.parse("800-53")).to eq(first_report_number: "800", second_report_number: "53")
     end
 
     it "consumes number with revision" do
-      expect(subject.parse(" 800-53r5")).to eq(report_number: "800-53", parts: [{ revision: "5" }])
+      expect(subject).to parse(" 800-53r5")
     end
   end
 end

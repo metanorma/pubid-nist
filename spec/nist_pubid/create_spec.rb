@@ -1,5 +1,5 @@
 module Pubid::Nist
-  RSpec.describe Identifier do
+  RSpec.describe Base do
     describe "creating new identifier" do
       subject { described_class.create(**{ number: number, series: series }.merge(params)) }
       let(:number) { 123 }
